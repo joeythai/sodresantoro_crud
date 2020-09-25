@@ -21,8 +21,8 @@
 <body>
 	
 	<div class="form">
-		<h2>New Product</h2>
-		<form method="post" action="<?php echo BASE_URL.'product/create'; ?>">
+		<h2>Edit Product</h2>
+		<form method="post" action="<?php echo BASE_URL.'product/update'; ?>">
 			<label for="category_id">Category:</label><br>
 			<select name="category_id">
 				<option value="0" selected="selected">Selecione</option>
@@ -35,25 +35,6 @@
 				<br><br>
 			<input type="submit" name="send" value="Send">
 		</form>
-
-		<table>
-			<thead>
-				<th>Product Name</th>
-				<th>Category</th>
-				<th>Delete</th>
-				<th>Edit</th>
-			</thead>
-			<tbody>
-				<?php foreach($products as $product): ?>
-					<tr>
-						<td><?php echo $product['name']; ?></td>
-						<td><?php echo $product['category_id'] == $category['id'] ? $category['name']: ''; ?></td>
-						<td><a href="<?php echo BASE_URL.'product/delete/'.$product['id']; ?>">Delete</a></td>
-						<td><a href="<?php echo BASE_URL.'product/edit/'.$product['id']; ?>">Edit</a></td>
-					</tr>
-				<?php endforeach;?>
-			</tbody>
-		</table>
 		
 	</div>
 </body>

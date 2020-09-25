@@ -54,7 +54,7 @@ class CategoryModel extends Model
 		$name = $data['name'];
 		$id = $data['id'];
 
-		print_r($id, $data);
+		
 		$sql = "UPDATE categories SET name = :name WHERE id = :id";
 		$sql = $this->pdo->prepare($sql); 
 		$sql->bindValue(':name', $name);

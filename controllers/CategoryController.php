@@ -43,9 +43,22 @@ class CategoryController extends Controller
 		$this->loadTemplate('edit_category', $data);
 	}
 
-	public function update($id)
+	public function update()
 	{
-		echo 'to aqui';
+		$categoryModel = new CategoryModel();
+		$categories = array();
+
+		if(isset($_POST['category']) && !empty($_POST['category']))
+		{
+			$nameCategory = addslashes($_POST['category']);
+			$id = addslashes($_POST['id']);
+			
+
+			$categories['name'] = $nameCategory;
+			$categories['id'] = $id;
+			
+			$categoryModel->update($categories);
+		}
 	}
 
 	public function delete($id)
