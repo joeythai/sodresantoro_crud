@@ -47,6 +47,8 @@ class CategoryModel extends Model
 		$sql->bindValue(':name', $name);
 		
 		$sql->execute();
+
+		header('Location: ' . BASE_URL . 'category');
 	}
 
 	public function update(Array $data)
@@ -60,6 +62,8 @@ class CategoryModel extends Model
 		$sql->bindValue(':name', $name);
 		$sql->bindValue(':id', $id);
 		$sql->execute();
+
+		header('Location: ' . BASE_URL . 'category');
 	}
 
 	public function list()
@@ -70,7 +74,7 @@ class CategoryModel extends Model
 		$sql = $this->pdo->query($sql);
 		if($sql->rowCount() > 0)
 		{
-			$list = $sql->fetchAll();
+			$list = $sql->fetchAll(PDO::FETCH_ASSOC);
 		}
 
 		return $list;
@@ -78,8 +82,13 @@ class CategoryModel extends Model
 
 	public function delete($id)
 	{
-		//$sql = "DELETE FROM categories WHERE id"
-		echo 'oi';
+		$id = $id;
+		$sql = "DELETE FROM categories WHERE id = :id";
+		$sql = $this->pdo->prepare($sql);
+		$sql->bindValue(':id', $id);
+		$sql->execute();
+
+		header('Location: ' . BASE_URL . 'category');
 	}
 
 	public function showCategory($id)

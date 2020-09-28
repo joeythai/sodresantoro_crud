@@ -14,6 +14,8 @@ class ProductModel extends Model
 		$sql->bindValue(':name', $name);
 		$sql->bindValue(':categoryId', $categoryId);
 		$sql->execute();
+
+		header('Location: ' . BASE_URL . 'product');
 		
 	}
 
@@ -30,17 +32,20 @@ class ProductModel extends Model
 		$sql->bindValue('categoryId', $categoryId);
 		$sql->bindValue(':id', $id);
 		$sql->execute();
+
+		header('Location: ' . BASE_URL . 'product');
 	}
 
 	public function list()
 	{
 		$list = array();
 
-		$sql = "SELECT * FROM products";
+		$sql = "SELECT products.id, products.name as name_product, products.category_id, categories.name as name_category FROM products
+				JOIN categories ON (products.category_id = categories.id )";
 		$sql = $this->pdo->query($sql);
 		if($sql->rowCount() > 0)
 		{
-			$list = $sql->fetchAll();
+			$list = $sql->fetchAll(PDO::FETCH_ASSOC);
 		}
 
 		return $list;
@@ -48,14 +53,22 @@ class ProductModel extends Model
 
 	public function delete($id)
 	{
+		$id = $id;
+		$sql = "DELETE FROM products WHERE id = :id";
+		$sql = $this->pdo->prepare($sql);
+		$sql->bindValue(':id', $id);
+		$sql->execute();
 
+		header('Location: ' . BASE_URL . 'product');
 	}
 
 	public function showProduct($id)
 	{
 		$show = array();
 
-		$sql = "SELECT * FROM products WHERE id = :id ";
+		$sql = "SELECT products.id, products.name as name_product, products.category_id, categories.name as name_category FROM products
+				JOIN categories ON (products.category_id = categories.id ) WHERE products.id = :id ";
+
 		$sql = $this->pdo->prepare($sql);
 		$sql->bindValue(':id', $id);
 		$sql->execute();

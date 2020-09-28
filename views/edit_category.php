@@ -8,15 +8,31 @@
 			background-color: #fff;
 			height: 600px;
 			margin: 0 auto;
-			width: 400px;
+			width: 600px;
 			padding: 15px;
 		}
 
 		.form form{
 			padding: 10px;
 			margin: 10px;
+			background-color: #ededed;			
 		}
-	</style>
+		input[type="text"]{
+			width: 80%;
+			margin: 0 auto;
+			padding: 10px;
+			border: none;
+			margin-bottom: 10px;
+			border-radius: 2px;
+		}
+		select{
+			width: 80%;
+			margin: 0 auto;
+			padding: 10px;
+			border: none;
+			margin-bottom: 10px;
+			border-radius: 2px;
+		}	</style>
 </head>
 <body>
 	

@@ -9,7 +9,7 @@ class ProductController extends Controller
 		$categories = $category->list();
 
 		$product = new ProductModel();
-		$products = $product->list();
+		$products = $product->list();		
 
 		$datas = array(
 			'categories' 	=> $categories,
@@ -39,11 +39,16 @@ class ProductController extends Controller
 
 	public function edit($id)
 	{
+
+		$category = new CategoryModel();
+		$categories = $category->list();
+
 		$productModel = new ProductModel();
 		$product = $productModel->showProduct($id);
-		
+
 		$data = array(
-			'products' => $product
+			'products' => $product,
+			'categories' => $categories
 		);
 
 		$this->loadTemplate('edit_product', $data);
@@ -56,16 +61,27 @@ class ProductController extends Controller
 
 		if(isset($_POST['product']) && !empty($_POST['product']))
 		{
+
 			$categoryId = addslashes($_POST['category_id']);
-			$nameProduct = addslashes($__POST['product']);
+			$nameProduct = addslashes($_POST['product']);
 			$id = addslashes($_POST['id']);
 			
 
 			$products['name'] = $nameProduct;
 			$products['id'] = $id;
 			$products['category_id'] = $categoryId;
+				
+			$productModel->update($products);			
+				
 			
-			$categoryModel->update($products);
 		}
+	}
+
+	public function delete($id)
+	{
+		$productModel = new ProductModel();
+		
+		$id = addslashes($id);
+		$productModel->delete($id);
 	}
 }

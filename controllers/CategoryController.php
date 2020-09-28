@@ -63,7 +63,11 @@ class CategoryController extends Controller
 
 	public function delete($id)
 	{
-		echo 'ok dle';
+		echo $id;
+		$categoryModel = new CategoryModel();
+
+		$id = addslashes($id);
+		$categoryModel->delete($id);
 	}
 
 }
